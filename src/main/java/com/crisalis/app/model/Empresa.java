@@ -1,8 +1,12 @@
 package com.crisalis.app.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.*;
 
-import org.springframework.context.annotation.Bean;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 
@@ -22,10 +26,20 @@ public class Empresa {
     private String razonsocial;
 	@Column(name = "fechainicio")
     private String fechainicio;
-	@Column(name = "persona")
-	private Integer cliente;
+	@OneToOne(fetch = FetchType.LAZY,optional = false)
+	@JoinColumn(name="cliente_id")
+	private Cliente cliente;
+	@JsonIgnore 
+
+	 @ManyToMany(fetch = FetchType.LAZY)
+	    @JoinTable(
+	        name = "empresa_producto", 
+	        joinColumns = @JoinColumn(name = "empresa_id"), 
+	        inverseJoinColumns = @JoinColumn(name = "producto_id")
+	    )
+	    private List<Producto> productosContratados = new ArrayList<>();
 	
-	public Empresa(Integer id, String nombre, String cuit, String razonsocial, String fechainicio, Integer cliente) {
+	public Empresa(Integer id, String nombre, String cuit, String razonsocial, String fechainicio, Cliente cliente) {
 		this.id = id;
 		this.nombre = nombre;
 		this.cuit = cuit;
@@ -87,12 +101,12 @@ public class Empresa {
 	}
 
 
-	public Integer getCliente() {
+	public Cliente getCliente() {
 		return cliente;
 	}
 
 
-	public void setCliente(Integer cliente) {
+	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
 

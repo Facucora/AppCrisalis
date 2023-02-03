@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.persistence.*;
 
-import org.springframework.context.annotation.Bean;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

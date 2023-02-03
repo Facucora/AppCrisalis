@@ -2,7 +2,6 @@ package com.crisalis.app.model;
 
 import javax.persistence.*;
 
-import org.springframework.context.annotation.Bean;
 
 
 

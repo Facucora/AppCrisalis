@@ -81,6 +81,7 @@ public class PedidoController {
 	     double impuestoIva = impuestoService.findImpuestosByID(1).get().getPorcentaje();
 	     double impuestoIibb = impuestoService.findImpuestosByID(2).get().getPorcentaje();
 	     double soporte = impuestoService.findImpuestosByID(3).get().getPorcentaje();
+	     double descuento = 0;
 	     List<Map<String, Object>> productos = (List<Map<String, Object>>) payload.get("productos");
 	     List<DetallePedido> detalles = new ArrayList<>();
 	     for (Map<String, Object> producto : productos) {
@@ -97,8 +98,9 @@ public class PedidoController {
 	         detallePedido.setPedido(pedidoNew);
 	         detalles.add(detallePedido);
 	         List<Producto> serviciosContratados = clienteService.getServiciosContratados((Integer)clienteId);
-	         if (!serviciosContratados.isEmpty()) {
+	         if (!serviciosContratados.isEmpty() && descuento + (precioTotal * 0.10) <= 2500) {
 	        	    // agregar el 10% de descuento a precioTotal
+	        	 descuento += precioTotal * 0.10;
 	        	    precioTotal = precioTotal - (precioTotal * 0.10);
 	        	}
 	     }

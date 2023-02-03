@@ -11,9 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.springframework.beans.factory.annotation.Value;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(schema = "dbo", name = "detalle")
@@ -27,9 +25,6 @@ public class DetallePedido {
     private Integer id;
 	@Column(name = "precio")
     private Double precio;
-	@Value("1")
-	@Column(name = "cantidad")
-    private Integer cantidad;
 	@ManyToOne(fetch = FetchType.LAZY,optional = false)
 	@JoinColumn(name="producto_id")
     private Producto producto;
@@ -42,7 +37,6 @@ public class DetallePedido {
 	public DetallePedido(Integer id, Double precio, Integer cantidad, Producto producto) {
 		this.id = id;
 		this.precio = precio;
-		this.cantidad = cantidad;
 		this.producto = producto;
 	}
 	
@@ -62,12 +56,7 @@ public class DetallePedido {
 	public void setPrecio(Double precio) {
 		this.precio = precio;
 	}
-	public Integer getCantidad() {
-		return cantidad;
-	}
-	public void setCantidad(Integer cantidad) {
-		this.cantidad = cantidad;
-	}
+	
 	public Producto getProducto() {
 		return producto;
 	}

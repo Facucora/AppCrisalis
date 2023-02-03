@@ -29,7 +29,6 @@ async function registrarPedido() {
     id: tr.querySelectorAll("td")[0].textContent.replace("id: ", ""),
   }));
   datos.precio = document.getElementById("total").value;
-  datos.cantidad = 1;
   const request = await fetch("api/pedidos/", {
     method: "POST",
     headers: {
@@ -72,8 +71,6 @@ async function cargarPedidos() {
       "</td><td>" +
       nombre +
       "</td><td>" +
-      pedido.cantidad +
-      "</td><td>" +
       pedido.precio +
       "</td><td>" +
       pedido.fechaCreacion +
@@ -87,7 +84,7 @@ async function cargarPedidos() {
   document.querySelector("#pedidosTable tbody").outerHTML = listadoHtml;
 }
 
-async function cargarServicioContratado(id) {
+async function cargarServicioCliente(id) {
   const request = await fetch('api/clientes/productos/' + id, {
     method: 'GET',
     headers: getHeaders()
@@ -95,11 +92,25 @@ async function cargarServicioContratado(id) {
     const servicios = await request.json();
     if (servicios.length > 0) {
       alert("Aplica descuento de 10%");
+    }else{
+      alert("NO Aplica descuento de 10%");
     }
     console.log(servicios)
   };
 
-
+  async function cargarServicioEmpresas(id) {
+    const request = await fetch('api/empresas/productos/' + id, {
+      method: 'GET',
+      headers: getHeaders()
+    }); 
+      const servicios = await request.json();
+      if (servicios.length > 0) {
+        alert("Aplica descuento de 10%");
+      }else{
+        alert("NO Aplica descuento de 10%");
+      }
+      console.log(servicios)
+    };
 async function eliminarPedido(id) {
   if (!confirm("¿Desea eliminar Pedido?")) {
     return;

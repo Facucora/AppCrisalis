@@ -1,5 +1,6 @@
 package com.crisalis.app.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import com.crisalis.app.model.Empresa;
+import com.crisalis.app.model.Producto;
 import com.crisalis.app.services.EmpresaService;
 import com.crisalis.app.utils.JWTUtil;
 
@@ -57,6 +59,12 @@ public class EmpresaController {
 	@RequestMapping(value = "api/empresas", method = RequestMethod.POST)
 	public void registrarEmpresa(@RequestBody Empresa empresa) {
 		empresaService.saveEmpresa(empresa);
+	}
+	
+	@RequestMapping(value = "api/empresas/productos/{id}", method = RequestMethod.GET)
+	public Iterable<Producto> getServiciosContratados(@PathVariable Integer id) {
+	        List<Producto> productosContratados = empresaService.getServiciosContratados(id);
+	        return productosContratados;
 	}
 	
 	@RequestMapping(value = "api/empresas/edit/{id}", method = RequestMethod.PUT)

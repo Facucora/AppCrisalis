@@ -2,7 +2,6 @@ package com.crisalis.app.model;
 
 import javax.persistence.*;
 
-import org.hibernate.annotations.ColumnDefault;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
