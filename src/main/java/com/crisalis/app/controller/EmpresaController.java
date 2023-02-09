@@ -11,9 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import com.crisalis.app.model.Cliente;
 import com.crisalis.app.model.Empresa;
 import com.crisalis.app.model.Producto;
+import com.crisalis.app.services.ClienteService;
 import com.crisalis.app.services.EmpresaService;
 import com.crisalis.app.utils.JWTUtil;
 
@@ -25,7 +26,8 @@ public class EmpresaController {
 
 	@Autowired
 	private final EmpresaService empresaService;
-	
+	@Autowired
+	private ClienteService clienteService;
 	public EmpresaController(EmpresaService empresaService) {
 		this.empresaService = empresaService;
 	}
@@ -64,6 +66,12 @@ public class EmpresaController {
 	@RequestMapping(value = "api/empresas/productos/{id}", method = RequestMethod.GET)
 	public Iterable<Producto> getServiciosContratados(@PathVariable Integer id) {
 	        List<Producto> productosContratados = empresaService.getServiciosContratados(id);
+	        return productosContratados;
+	}
+	
+	@RequestMapping(value = "api/empresas/contratados/{id}", method = RequestMethod.GET)
+	public Iterable<Producto> getContratados(@PathVariable Integer id) {
+	        List<Producto> productosContratados = empresaService.getProductosContratados(id);
 	        return productosContratados;
 	}
 	

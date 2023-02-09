@@ -26,7 +26,8 @@ public class Empresa {
     private String razonsocial;
 	@Column(name = "fechainicio")
     private String fechainicio;
-	@OneToOne(fetch = FetchType.LAZY,optional = false)
+
+	@OneToOne(fetch = FetchType.EAGER,optional = false)
 	@JoinColumn(name="cliente_id")
 	private Cliente cliente;
 	@JsonIgnore 
@@ -109,6 +110,7 @@ public class Empresa {
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
+
 
    
 }

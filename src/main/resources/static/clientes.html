@@ -149,15 +149,19 @@
                 >
                   <a class="dropdown-item" href="#">
                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                    Profile
+                    Perfil
                   </a>
                   <a class="dropdown-item" href="#">
                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                    Settings
+                    Configuracion
                   </a>
                   <a class="dropdown-item" href="#">
                     <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                    Activity Log
+                    Actividad
+                  </a>
+                  <a class="dropdown-item" href="#">
+                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Impuestos
                   </a>
                   <div class="dropdown-divider"></div>
                   <a
@@ -169,7 +173,7 @@
                     <i
                       class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"
                     ></i>
-                    Logout
+                    Cerrar Sesión
                   </a>
                 </div>
               </li>
@@ -371,6 +375,58 @@
                 </div>
               </div>
             </div>
+
+            <!-- Modal contratado-->
+
+            <div
+              class="modal fade"
+              id="modalTable"
+              data-bs-backdrop="static"
+              data-bs-keyboard="false"
+              tabindex="-1"
+              aria-labelledby="staticBackdropLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">
+                      Contratado 
+                    </h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body container">
+                    <table class="table" id="tableContratado">
+                      <thead>
+                        <tr>
+                          <th scope="col">ID</th>
+                          <th scope="col">Productos</th>
+                          <th scope="col">Servicios</th>
+                          <th scope="col">Precio</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Cerrar
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
             <!-- DataTales Example -->
             <div class="card shadow mb-4">
               <div class="card-header py-3">
@@ -434,7 +490,8 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Seguro que desea Salir?
+            </h5>
             <button
               class="close"
               type="button"
@@ -445,17 +502,16 @@
             </button>
           </div>
           <div class="modal-body">
-            Select "Logout" below if you are ready to end your current session.
-          </div>
+            Seleccione "Cerrar sesión" a continuación si está listo para finalizar su sesión actual..          </div>
           <div class="modal-footer">
             <button
               class="btn btn-secondary"
               type="button"
               data-dismiss="modal"
             >
-              Cancel
+              Cancelar
             </button>
-            <a class="btn btn-primary" href="login.html">Logout</a>
+            <a class="btn btn-primary" href="login.html">Cerrar Sesión</a>
           </div>
         </div>
       </div>

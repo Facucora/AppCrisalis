@@ -71,11 +71,10 @@ async function cargarPedidos() {
       "</td><td>" +
       nombre +
       "</td><td>" +
-      pedido.precio +
+      pedido.precio.toFixed(2) +
       "</td><td>" +
       pedido.fechaCreacion +
       "</td><td class='d-flex justify-content-evenly'>" +
-      botonEditar +
       botonEliminar +
       "</td></tr>";
     listadoHtml += pedidoHtml;
@@ -83,6 +82,8 @@ async function cargarPedidos() {
 
   document.querySelector("#pedidosTable tbody").outerHTML = listadoHtml;
 }
+
+
 
 async function cargarServicioCliente(id) {
   const request = await fetch('api/clientes/productos/' + id, {
@@ -265,13 +266,28 @@ function actualizarTotal() {
   });
   $("#total").text(total);
 }
-$("#selectCliente").change(function () {
-  $("#selectEmpresa").prop("disabled", true);
-});
 
-$("#selectEmpresa").change(function () {
+$("#selectCliente").change(function () {
+  var selectedOption = $(this).val();
+  if (selectedOption === "Cliente...") {
+  $("#selectEmpresa").prop("disabled", false);
+  $("#consultarDescuentoEmp").prop("disabled", false);
+  } else {
+  $("#selectEmpresa").prop("disabled", true);
+  $("#consultarDescuentoEmp").prop("disabled", true);
+  }
+  });
+  
+  $("#selectEmpresa").change(function () {
+  var selectedOption = $(this).val();
+  if (selectedOption === "Empresas...") {
+  $("#selectCliente").prop("disabled", false);
+  $("#consultarDescuentoCli").prop("disabled", false);
+  } else {
   $("#selectCliente").prop("disabled", true);
-});
+  $("#consultarDescuentoCli").prop("disabled", true);
+  }
+  });
 
 //   //Deshabilitar select no usado
 //   document.getElementById("selectCliente").addEventListener("change", function(){

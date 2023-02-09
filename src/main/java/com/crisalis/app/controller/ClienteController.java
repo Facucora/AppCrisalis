@@ -67,6 +67,11 @@ public class ClienteController {
 	        return productosContratados;
 	}
 	
+	@RequestMapping(value = "api/clientes/contratados/{id}", method = RequestMethod.GET)
+	public Iterable<Producto> getContratados(@PathVariable Integer id) {
+	        List<Producto> productosContratados = clienteService.getProductosContratados(id);
+	        return productosContratados;
+	}
 	@RequestMapping(value = "api/clientes/edit/{id}", method = RequestMethod.PUT)
 	public void editarCliente(@PathVariable Integer id, @RequestBody Cliente cliente) {
 		cliente.setId(id);

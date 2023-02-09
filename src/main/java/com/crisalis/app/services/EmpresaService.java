@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.crisalis.app.dao.EmpresaRepository;
 import com.crisalis.app.dao.PedidoRepository;
+import com.crisalis.app.model.Cliente;
 import com.crisalis.app.model.DetallePedido;
 import com.crisalis.app.model.Empresa;
 import com.crisalis.app.model.Pedido;
@@ -29,7 +30,7 @@ public class EmpresaService {
 	}
 
 	public Empresa saveEmpresa(Empresa empresa) {
-			return this.empresaRepository.save(empresa);
+		return this.empresaRepository.save(empresa);
 	}
 	
 

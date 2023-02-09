@@ -20,7 +20,7 @@ function actualizarEmailDelUsuario() {
   let listadoHtml = '';
   for (let cliente of clientes) {
     let botonEliminar = '<a href="#" onclick="eliminarCliente(' + cliente.id + ')" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></a>';
-    let botonContratado = '<a href="#" onclick="cargarContratado(' + cliente.id + ')" id="botonContratado" data-bs-toggle="modal" data-bs-target="#staticBackdrop2" class="btn btn-success btn-circle btn-sm"><i class="fas fa-info-circle"></i></a>'
+    let botonContratado = '<a href="#" onclick="cargarContratadoCliente(' + cliente.id + ')" id="botonContratado" data-bs-toggle="modal" data-bs-target="#modalTable" class="btn btn-success btn-circle btn-sm"><i class="bi bi-card-list"></i></a>'
     let botonEditar = '<a href="#" onclick="cargarCliente(' + cliente.id + ')" id="botonUpdate" data-bs-toggle="modal" data-bs-target="#staticBackdrop2" class="btn btn-info btn-circle btn-sm"><i class="fas fa-info-circle"></i></a>'
     let clienteHtml = '<tr><td>'+cliente.id+'</td><td>'+cliente.nombre+'</td><td>'+ cliente.apellido+'</td><td>'
                     + cliente.dni+'</td><td class="d-flex justify-content-evenly">' + botonEditar + botonEliminar+ botonContratado+ '</td></tr>';
@@ -56,6 +56,45 @@ async function registrarCliente() {
   window.location.href = 'clientes.html'
 
 }
+
+async function cargarContratadoCliente(id) {
+  const request = await fetch('api/pedidos/contratados/' + id, {
+    method: 'GET',
+    headers: getHeaders()
+  }); 
+    const contratados = await request.json();
+
+    let tableBody = document.querySelector("#tableContratado tbody");
+  tableBody.innerHTML = "";
+
+  contratados.forEach(item => {
+    let row = document.createElement("tr");
+    let idColumn = document.createElement("td");
+    idColumn.innerText = item.id;
+    row.appendChild(idColumn);
+
+    let productColumn = document.createElement("td");
+    let serviceColumn = document.createElement("td");
+    if (item.tipo === "Producto") {
+      productColumn.innerText = item.nombre;
+      row.appendChild(productColumn);
+      serviceColumn.innerText = "";
+      row.appendChild(serviceColumn);
+    } else if (item.tipo === "Servicio") {
+      productColumn.innerText = "";
+      row.appendChild(productColumn);
+      serviceColumn.innerText = item.nombre;
+      row.appendChild(serviceColumn);
+    }
+
+    let priceColumn = document.createElement("td");
+    priceColumn.innerText = item.precio;
+    row.appendChild(priceColumn);
+
+    tableBody.appendChild(row);
+  });
+    
+  };
 
 
 async function cargarCliente(id) {

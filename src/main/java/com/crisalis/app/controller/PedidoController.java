@@ -81,6 +81,7 @@ public class PedidoController {
 	     double impuestoIva = impuestoService.findImpuestosByID(1).get().getPorcentaje();
 	     double impuestoIibb = impuestoService.findImpuestosByID(2).get().getPorcentaje();
 	     double soporte = impuestoService.findImpuestosByID(3).get().getPorcentaje();
+	     double garantia = impuestoService.findImpuestosByID(4).get().getPorcentaje();
 	     double descuento = 0;
 	     List<Map<String, Object>> productos = (List<Map<String, Object>>) payload.get("productos");
 	     List<DetallePedido> detalles = new ArrayList<>();
@@ -127,7 +128,7 @@ public class PedidoController {
 		
 	}
 	
-	@RequestMapping(value = "api/pedidos/productos/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "api/pedidos/contratados/{id}", method = RequestMethod.GET)
 	public Iterable<Producto> getProductosContratados(@PathVariable Integer id) {
 	        List<Producto> productosContratados = clienteService.getProductosContratados(id);
 	        return productosContratados;
@@ -150,8 +151,8 @@ public class PedidoController {
 	}
 	
 	
-	@RequestMapping(value = "api/pedidos/edit/{id}", method = RequestMethod.PUT)
-	public void editarCliente(@PathVariable Integer id, @RequestBody Pedido pedido) {
+	@RequestMapping(value = "api/pedidos/{id}", method = RequestMethod.PUT)
+	public void editarPedido(@PathVariable Integer id, @RequestBody Pedido pedido) {
 		pedido.setId(id);
 		pedidoService.savePedido(pedido);
 		
